@@ -5,8 +5,8 @@ import Footer from "./Footer";
 function Layout({ children }) {
     return <>
             <Header />
-            <main>
-
+            <main className="bg-background text-white h-screen">
+                {children}
             </main>
             <Footer />
             </>
