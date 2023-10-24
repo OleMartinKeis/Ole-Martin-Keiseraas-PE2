@@ -16,6 +16,7 @@ export default {
             'primary': '#a0b5ca',
             'secondary': '#1ea3be',
             'accent': '#3df5ff',
+            'cta': '#4169E1'
         },
         fontFamily: {
             'sans': ['Lato']
