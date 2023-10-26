@@ -23,20 +23,19 @@ function Navbar() {
                             </li>
                         ) : (
                             <li>
-                            <span onClick={() => navigate("/register")} className="text-text hover:text-gray-100 hover:cursor-pointer">Register</span>
+                                <span onClick={() => navigate("/register")} className="text-text hover:text-gray-100 hover:cursor-pointer">Register</span>
                             </li> 
-
-                    )}
-                    {!isAuthenticated ? (
+                        )}
+                        {!isAuthenticated ? (
                         <li>
                             <span onClick={() => navigate("/login")} className="text-text hover:text-gray-100 hover:cursor-pointer">Login</span>
                         </li>
                     ) : (
                         <li>
-                        <span onClick={() => navigate("/venues")} className="text-text hover:cursor-pointer hover:text-gray-100">
-                        Venues
-                        </span>
-                </li>
+                            <span onClick={() => navigate("/venues")} className="text-text hover:cursor-pointer hover:text-gray-100">
+                            Venues
+                            </span>
+                        </li>
                     )}
 
 
