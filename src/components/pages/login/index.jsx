@@ -8,7 +8,7 @@ const path = "/auth/login"
 
 function Login() {
     const { setIsAuthenticated } = useAuth();
-    const { isSubmitting } = formState;
+    
     const toHome = useNavigate();
     const { control, handleSubmit, formState } = useForm({
         defaultValues: {
@@ -16,6 +16,7 @@ function Login() {
             password: '',
         }
     });
+    const { isSubmitting } = formState;
 
     const onSubmit = async (data) => {
         try{
@@ -63,7 +64,7 @@ function Login() {
                     <Controller name="password" control={control} rules={{ required: 'Name is required' }} render={({ field }) => <input {...field} type="text" required/>}/>
                 </div>
                 <div>
-                    <button onClick={handleButtonClick} disabled={isSubmitting}  className="bg-cta" type="Submit">Submit</button>
+                    <button disabled={isSubmitting}  className="bg-cta" type="Submit">Submit</button>
                 </div>
             </form>
         </div>
