@@ -1,27 +1,45 @@
 import React from "react";
-import { Router } from "react-router";
+import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../storage/authentication";
 
 function Navbar() {
+    const navigate = useNavigate();
+    const { isAuthenticated } = useAuth();
+
     return (
         <div>
             <nav className="p-4 bg-primary">
                 <div className="container mx-auto flex justify-between items-center">
-                    <Link to="/" className="text-text text-2xl font-bold hover:text-gray-100 font-['Playfair_Display_SC']">
+                    <span onClick={() => navigate("/")} className="text-text text-2xl font-bold hover:text-gray-100 hover:cursor-pointer font-['Playfair_Display_SC']">
                     VenueVista
-                    </Link>
-
+                    </span>
                     <ul className="flex space-x-4">
-                    <li>
-                        <Link to="/venues" className="text-text hover:text-gray-100">
+                        {isAuthenticated ? (
+                            <li>
+                                <span onClick={() => navigate("/profile")} className="text-text hover:text-gray-100 hover:cursor-pointer">
+                                My Profile
+                                </span>
+                            </li>
+                        ) : (
+                            <li>
+                            <span onClick={() => navigate("/register")} className="text-text hover:text-gray-100 hover:cursor-pointer">Register</span>
+                            </li> 
+
+                    )}
+                    {!isAuthenticated ? (
+                        <li>
+                            <span onClick={() => navigate("/login")} className="text-text hover:text-gray-100 hover:cursor-pointer">Login</span>
+                        </li>
+                    ) : (
+                        <li>
+                        <span onClick={() => navigate("/venues")} className="text-text hover:cursor-pointer hover:text-gray-100">
                         Venues
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/profile" href="/profile" className="text-text hover:text-gray-100">
-                        My Profile
-                        </Link>
-                    </li>
+                        </span>
+                </li>
+                    )}
+
+
                     </ul>
                 </div>
             </nav>
