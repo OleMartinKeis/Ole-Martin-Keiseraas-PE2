@@ -1,25 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom"
 import { API_HOST_URL } from "../../storage/constants";
+import { useAuth } from "../../storage/authentication";
 
 const path = "/auth/login"
 
 function Login() {
+    const { setIsAuthenticated } = useAuth();
+    const { isSubmitting } = formState;
+    const toHome = useNavigate();
     const { control, handleSubmit, formState } = useForm({
         defaultValues: {
             email: '',
             password: '',
         }
     });
-
-
-    const { isSubmitting } = formState;
-    const toHome = useNavigate();
-
-    const handleButtonClick = (event) => {
-        event.preventDefault();
-    }
 
     const onSubmit = async (data) => {
         try{
@@ -40,9 +36,11 @@ function Login() {
                     avatar: responseData.avatar,
                     venueManager: responseData.venueManager,
                 };
+                
                 localStorage.setItem("token", responseData.accessToken)
-                localStorage.setItem("user", JSON.stringify(user))
-                toHome("/")
+                localStorage.setItem("user", JSON.stringify(user));
+                setIsAuthenticated(true);
+                toHome("/");
             } else {
                 console.error("Login failed");
             }
@@ -65,7 +63,7 @@ function Login() {
                     <Controller name="password" control={control} rules={{ required: 'Name is required' }} render={({ field }) => <input {...field} type="text" required/>}/>
                 </div>
                 <div>
-                    <button disabled={isSubmitting}  className="bg-cta" type="Submit">Submit</button>
+                    <button onClick={handleButtonClick} disabled={isSubmitting}  className="bg-cta" type="Submit">Submit</button>
                 </div>
             </form>
         </div>
