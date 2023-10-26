@@ -7,6 +7,7 @@ import { Authentication, useAuth } from './components/storage/authentication'
 import Layout from './components/ui/Layout'
 import './index.css'
 import { Routes, Route } from 'react-router'
+import Venues from './components/pages/venues'
 
 
 
@@ -22,6 +23,7 @@ function App() {
                         <Route path="/profile" element={<Profile />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/login" element={<Login />} />
+                        <Route path="/venues" element={<Venues />}/>
                     </Routes>
             </Layout>
         </div>
