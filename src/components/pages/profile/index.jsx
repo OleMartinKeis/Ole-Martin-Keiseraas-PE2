@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { API_HOST_URL } from "../../storage/constants";
+import Logout from "../../storage/logout/logout";
 
 
 
@@ -65,6 +66,7 @@ function Profile() {
                 <button className="bg-cta">Update avatar</button>
                 </div>
             </form>
+            <Logout />
         </div>
 
     )
