@@ -7,7 +7,7 @@ const path = "/venues"
 
 function Venues() {
     const [userInput, setUserInput] = useState("");
-    const url = `${API_HOST_URL}${path}`;
+    const url = `${API_HOST_URL}${path}?_owner=true&_bookings=true`;
     const { data: apiData, isLoading, isError } = useAPI(url)
     
     const handleInputChange = (e) => {
@@ -35,14 +35,24 @@ function Venues() {
     
 
     return(
-        <div>
-            <div>
-                <input type="text" value={userInput} placeholder="Search for venues!" onChange={handleInputChange}></input>
+        <div className="w-100">
+            <div className="flex place-content-center">
+                <input type="text" className="mt-4 mb-4 p-1" value={userInput} placeholder="Search for venues!" onChange={handleInputChange}></input>
             </div>
-            <div>
+            <div className="flex place-content-center flex-wrap basis-3">
                 {filteredData.map((item) => (
-                    <div key={item.id}>
-                        <h1>{item.name}</h1>
+                    <div key={item.id} className="flex p-4 border-2 max-w-sm">
+                        <a href={`/venues/${item.id}`}>
+                            <div className="">
+                                <h2 className="text-xl">{item.name}</h2>
+                                <div className="w-64 h-64">
+                                    <img src={item.media[0]} className="w-full h-full object-cover rounded-md"></img>
+                                </div>
+                                <div className="mt-2">
+                                    <p className="opacity-50 italic text-sm">{item.location.country}, {item.  location.city}</p>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 ))}
             </div>
