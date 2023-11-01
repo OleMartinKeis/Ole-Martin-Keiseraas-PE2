@@ -8,6 +8,7 @@ import Layout from './components/ui/Layout'
 import './index.css'
 import { Routes, Route } from 'react-router'
 import Venues from './components/pages/venues'
+import Venue from './components/pages/venue'
 
 
 
@@ -24,6 +25,7 @@ function App() {
                         <Route path="/register" element={<Register />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/venues" element={<Venues />}/>
+                        <Route path="/venues/:id" element={<Venue />}/>
                     </Routes>
             </Layout>
         </div>
