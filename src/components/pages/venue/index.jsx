@@ -2,11 +2,12 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import useAPI from "../../storage/getApi";
 import { API_HOST_URL } from "../../storage/constants";
+import Booking from "./booking";
 
 
 function Venue() {
     const { id } = useParams();
-    const { data } = useAPI(`${API_HOST_URL}/venues/${id}?_owner=true`)
+    const { data } = useAPI(`${API_HOST_URL}/venues/${id}?owner=true&bookings=true`)
     
     if (!data) {
         return <div>Loading...</div>
@@ -81,6 +82,11 @@ function Venue() {
                         <h3>Anonymous</h3>
                     )}
                 </div>
+                {data.bookings &&
+                    data.bookings.map(() => (
+                        <div>{data.booking}</div>
+                    ))}
+                <Booking />
             </div>
         </div>
     )
