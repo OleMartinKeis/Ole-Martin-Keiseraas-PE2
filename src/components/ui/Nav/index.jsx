@@ -1,11 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
 import { useAuth } from "../../storage/authentication";
 
 function Navbar() {
     const navigate = useNavigate();
     const { isAuthenticated } = useAuth();
+    const isVenueManager = localStorage.getItem("venueManager") === "true";
+
+    console.log("isAuthenticated:", isAuthenticated);
+console.log("isVenueManager:", isVenueManager);
 
     return (
         <div>
@@ -38,7 +41,11 @@ function Navbar() {
                         </li>
                     )}
 
-
+                    {isVenueManager && isAuthenticated && (
+                        <li>
+                            <span onClick={() => navigate("/manage")} className="text-text hover:cursor-pointer hover:text-gray-100">Manage venues</span>
+                        </li>
+                    )}
                     </ul>
                 </div>
             </nav>
