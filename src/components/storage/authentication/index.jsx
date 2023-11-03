@@ -7,7 +7,7 @@ function Authentication({ children }) {
 
     useEffect(() => {
         const token = localStorage.getItem("token");
-        setIsAuthenticated(token !== null);
+        setIsAuthenticated(!!token);
     },[])
 
     return (
