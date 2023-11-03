@@ -9,6 +9,8 @@ import './index.css'
 import { Routes, Route } from 'react-router'
 import Venues from './components/pages/venues'
 import Venue from './components/pages/venue'
+import Create from './components/pages/create'
+import ManageVenues from './components/pages/manage'
 
 
 
@@ -25,6 +27,8 @@ function App() {
                         <Route path="/register" element={<Register />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/venues" element={<Venues />}/>
+                        <Route path="/create" element={<Create />}/>
+                        <Route path="/manage" element={<ManageVenues />}/>
                         <Route path="/venues/:id" element={<Venue />}/>
                     </Routes>
             </Layout>
