@@ -5,10 +5,8 @@ import { useAuth } from "../../storage/authentication";
 function Navbar() {
     const navigate = useNavigate();
     const { isAuthenticated } = useAuth();
-    const isVenueManager = localStorage.getItem("venueManager") === "true";
-
-    console.log("isAuthenticated:", isAuthenticated);
-console.log("isVenueManager:", isVenueManager);
+    const user = JSON.parse(localStorage.getItem("user"))
+    const isVenueManager = user && user.venueManager === true;
 
     return (
         <div>
