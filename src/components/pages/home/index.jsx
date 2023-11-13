@@ -4,7 +4,7 @@ import { API_HOST_URL } from "../../storage/constants";
 import VenueSearch from "./venueSearch.jsx";
 
 function Home() {
-    const { data: allVenues } = useAPI(`${API_HOST_URL}/venues?owner=true&bookings=true`)
+    const { data: allVenues } = useAPI(`${API_HOST_URL}/venues?owner=true&bookings=true&sort=rating&sortOrder=desc`)
     const [filteredVenues, setFilteredVenues] = useState(allVenues);
     const [noResults, setNoResults] = useState(false);
 
@@ -67,10 +67,11 @@ function Home() {
                 <VenueSearch onSearch={filterVenues}/>
                 {noResults && <p>Your search didn't provide any results, please try again</p>}
             </div>
+            <div><h2>Our highest rated venues:</h2></div>
             <div className="flex place-content-center flex-wrap basis-3">
                 {filteredVenues.length > 0 ? (
                 filteredVenues.map((item) => (
-                    <div key={item.id} className="flex p-4 border-2 max-w-sm">
+                    <div key={item.id} className="flex p-4 border-2 max-w-sm truncate">
                         <a href={`/venues/${item.id}`}>
                             <div className="">
                                 <h2 className="text-xl">{item.name}</h2>
