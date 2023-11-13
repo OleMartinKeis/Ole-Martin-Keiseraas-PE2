@@ -11,6 +11,7 @@ import Venues from './components/pages/venues'
 import Venue from './components/pages/venue'
 import Create from './components/pages/create'
 import ManageVenues from './components/pages/manage'
+import Edit from './components/pages/manage/update'
 
 
 
@@ -28,6 +29,7 @@ function App() {
                         <Route path="/login" element={<Login />} />
                         <Route path="/venues" element={<Venues />}/>
                         <Route path="/create" element={<Create />}/>
+                        <Route path="/edit/:id" element={<Edit />} />
                         <Route path="/manage" element={<ManageVenues />}/>
                         <Route path="/venues/:id" element={<Venue />}/>
                     </Routes>
