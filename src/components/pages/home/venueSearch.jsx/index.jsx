@@ -20,93 +20,86 @@ function VenueSearch({ onSearch }) {
         });
     };
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-
-    //     const query = {
-    //         location: searchParams.location,
-    //         checkInDate: searchParams.checkInDate,
-    //         checkOutDate: searchParams.checkOutDate,
-    //         guests: searchParams.guests,
-    //         wifi: searchParams.wifi,
-    //         parking: searchParams.parking,
-    //         breakfast: searchParams.breakfast,
-    //     }
-
-    //     onSearch(searchParams)
-    // };
-
     const handleSearch= () => {
         onSearch(searchParams)
         console.log("test")
     }
 
     return(
-        <div>
-
-        <input
-          type="text"
-          name="location"
-          placeholder="Location (continent or country)"
-          value={searchParams.location}
-          onChange={handleInputChange}
-        />
-        <input
-          type="date"
-          name="checkInDate"
-          value={searchParams.checkInDate}
-          onChange={handleInputChange}
-        />
-        <input
-          type="date"
-          name="checkOutDate"
-          value={searchParams.checkOutDate}
-          onChange={handleInputChange}
-        />
-        <input
-          type="number"
-          name="guests"
-          placeholder="Number of Guests"
-          value={searchParams.guests}
-          onChange={handleInputChange}
-        />
-        <label>
-          <input
-            type="checkbox"
-            name="wifi"
-            checked={searchParams.wifi}
-            onChange={handleInputChange}
-          />
-          Wifi
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            name="breakfast"
-            checked={searchParams.breakfast}
-            onChange={handleInputChange}
-          />
-          Breakfast
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            name="parking"
-            checked={searchParams.parking}
-            onChange={handleInputChange}
-          />
-          Parking
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            name="pets"
-            checked={searchParams.pets}
-            onChange={handleInputChange}
-          />
-          Pets
-        </label>
-        <button onClick={handleSearch}>Search</button>
+        <div className="grid">
+            <div className="grid-flow-col">
+                <input
+                type="text"
+                name="location"
+                placeholder="Location (continent or country)"
+                value={searchParams.location}
+                onChange={handleInputChange}
+                className="bg-background text-white border-b border-accent ml-3 px-2 leading-tight"
+                />
+                <input
+                type="date"
+                name="checkInDate"
+                value={searchParams.checkInDate}
+                onChange={handleInputChange}
+                className="bg-background border-b border-accent ml-3 px-2 leading-tight text-white"
+                />
+                <input
+                type="date"
+                name="checkOutDate"
+                value={searchParams.checkOutDate}
+                onChange={handleInputChange}
+                className="bg-background border-b border-accent ml-3 px-2 leading-tight text-white"
+                />
+                <input
+                type="number"
+                name="guests"
+                placeholder="Number of Guests"
+                value={searchParams.guests}
+                onChange={handleInputChange}
+                className="bg-background border-b border-accent ml-3 px-2 leading-tight"
+                />
+            </div>
+            <div>
+                <label className="bg-background text-white border-b border-accent ml-3 px-2 leading-tight">
+                <input
+                    type="checkbox"
+                    name="wifi"
+                    checked={searchParams.wifi}
+                    onChange={handleInputChange}
+                    
+                />
+                Wifi
+                </label>
+                <label className="bg-background text-white border-b border-accent ml-3 px-2 leading-tight">
+                <input
+                    type="checkbox"
+                    name="breakfast"
+                    checked={searchParams.breakfast}
+                    onChange={handleInputChange}
+                />
+                Breakfast
+                </label>
+                <label className="bg-background text-white border-b border-accent ml-3 px-2 leading-tight">
+                <input
+                    type="checkbox"
+                    name="parking"
+                    checked={searchParams.parking}
+                    onChange={handleInputChange}
+                />
+                Parking
+                </label>
+                <label className="bg-background text-white border-b border-accent ml-3 px-2 leading-tight">
+                <input
+                    type="checkbox"
+                    name="pets"
+                    checked={searchParams.pets}
+                    onChange={handleInputChange}
+                />
+                Pets
+                </label>
+            </div> 
+        
+        <button className="bg-cta text-white" onClick={handleSearch}>Search</button>
 
         </div>
     )
