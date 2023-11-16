@@ -50,23 +50,23 @@ function Register() {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <label>Name:</label>
-                    <Controller name="name" control={control} rules={{ required: 'Name is required' }} render={({ field }) => <input className="text-text" {...field} required type="text" />}/>
+                    <Controller name="name" control={control} rules={{ required: 'Name is required' }} render={({ field }) => <input className="bg-background border-b border-accent ml-3 px-2 leading-tight" {...field} required type="text" />}/>
                 </div>
                 <div>
                     <label>Email:</label>
-                    <Controller name="email" control={control} rules={{ required: 'Name is required' }} render={({ field }) => <input className="text-text" {...field} required type="text" />}/>
+                    <Controller name="email" control={control} rules={{ required: 'Name is required' }} render={({ field }) => <input className="bg-background border-b border-accent ml-3 px-2 leading-tight" {...field} required type="text" />}/>
                 </div>
                 <div>
                     <label>Password:</label>
-                    <Controller name="password" control={control} rules={{ required: 'Name is required' }} render={({ field }) => <input className="text-text" {...field} type="text" required/>}/>
+                    <Controller name="password" control={control} rules={{ required: 'Name is required' }} render={({ field }) => <input className="bg-background border-b border-accent ml-3 px-2 leading-tight" {...field} type="text" required/>}/>
                 </div>
                 <div>
                     <label>Avatar:</label>
-                    <Controller name="avatar" control={control} render={({ field }) => <input className="text-text" {...field} type="url" />}/>
+                    <Controller name="avatar" control={control} render={({ field }) => <input className="bg-background border-b border-accent ml-3 px-2 leading-tight" {...field} type="url" />}/>
                 </div>
                 <div>
                     <label>Do you want to be a VenueManager?</label>
-                    <Controller name="venueManager" control={control} render={({ field }) => <input className="text-text" {...field} type="checkbox" />}/>
+                    <Controller name="venueManager" control={control} render={({ field }) => <input className="bg-background border-b border-accent ml-3 px-2 leading-tight" {...field} type="checkbox" />}/>
                 </div>
                 <div>
                     <button disabled={isSubmitting} className="bg-cta" type="Submit">Register
