@@ -2,18 +2,17 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import useAPI from "../../storage/getApi";
 import { API_HOST_URL } from "../../storage/constants";
-import Booking from "./booking";
 import BookingInfo from "./booking";
 import Calendar from "react-calendar";
+
 
 function Venue() {
     const { id } = useParams();
     const { data } = useAPI(`${API_HOST_URL}/venues/${id}?_owner=true&_bookings=true`);
-    const [selectedDate, setSelectedDate] = useState(null);
-    
-    if (!data) {
-        return <div>Loading...</div>
-    }
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [numGuests, setNumGuests] = useState(1);
+    const token = localStorage.getItem("token")
+
 
     const metaLabels = {
         wifi: "fa-wifi",
@@ -30,10 +29,43 @@ function Venue() {
       }))
     : [];
 
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
-    }
+    const handleNumGuestsChange = (e) => {
+        setNumGuests(Number(e.target.value));
+    };
 
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch(`${API_HOST_URL}/bookings`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+              },
+              body: JSON.stringify({
+                venueId: id,
+                dateFrom: selectedDate[0],
+                dateTo: selectedDate[1],
+                guests: numGuests,
+              }),
+            });
+      
+            if (response.ok) {
+              console.log("Booking added successfully!");
+            } else {
+                console.log(token)
+              console.error("Error adding booking:", response.statusText);
+            }
+          } catch (error) {
+            console.error("Error adding booking:", error.message);
+          }
+        };
+  
+        if (!data) {
+          return <div>Loading...</div>
+
+    }
     
     return(
         <div>
@@ -61,6 +93,19 @@ function Venue() {
                     ))}
                 </div>
             </div>
+            <div>
+                <h2>Owner:</h2>
+                    {data.owner ? (
+                        <div>
+                            <hr className="border-accent"/>
+                                <h3 className="pt-4 pb-4">{data.owner.name} Is a trusted host <br></br> Cancel within 1 week for no charge</h3>
+                            <hr className="border-accent"/>
+                        </div>
+                    ) : (
+                        <h3>Anonymous</h3>
+                       
+                    )}
+                </div>
                 <div>
                     <p>Price per night: {data.price} kr</p>
                     <p>Max Guests: {data.maxGuests}</p>
@@ -88,40 +133,52 @@ function Venue() {
                         <p>No information provided</p>
                     )}
                 </div>
-                <div>
-                    <h2>Owner:</h2>
-                    {data.owner ? (
-                        <h3>{data.owner.name}</h3>
-                    ) : (
-                        <h3>Anonymous</h3>
-                    )}
-                </div>
             <div>
             {data.bookings && data.bookings.length > 0 && (
                 <div>
                     <h2>Bookings for this Venue</h2>
-                    <ul>
-                        {data.bookings.map((booking) => (
-                        <BookingInfo key={booking.id} booking={booking} />
-                        ))}
-                    </ul>
-                    <h2>Calendar</h2>
-                    <Calendar
-                    onChange={handleDateChange}
-                    value={selectedDate}
-                    tileClassName={({ date, view }) => {
-                        if (view === "month") {
-                        const isBooked = bookedDates.some(
-                            (bookingDate) =>
-                            date >= new Date(bookingDate.dateFrom) && date <= new Date(bookingDate.dateTo)
-                        );
-                    return isBooked && "bg-background text-grey border-radius-1 rounded-md ";
-                }
-                return null;
-                }}
-                className="bg-white text-text mt-6 p-4 border border-gray-300 rounded-lg shadow-md max-w-md mx-auto"
+                    <form onSubmit={handleSubmit}>
+                        <div>
+                            <h2>Calendar</h2>
+                            <Calendar
+                            selectRange={true}
+                            onChange={setSelectedDate}
+                            value={selectedDate}
+                            className="Calendar-container bg-white text-text mt-6 p-4 border border-gray-300 rounded-lg shadow-md max-w-md mx-auto "
+                            tileClassName={({ date, view }) => {
+                                if (view === "month") {
+                                const isBooked = bookedDates.some(
+                                    (bookingDate) =>
+                                    date >= new Date(bookingDate.dateFrom) && date <= new Date(bookingDate.dateTo)
+                                );
+                            return isBooked && "booked-date";
+                            }
+                            }}
+                            />
+                        </div>
+                        <div>
+                            {selectedDate.length > 0 && (
+                                <div>
+                                    <p>
+                                        <span>Start: </span>{selectedDate[0].toDateString()}
+                                        &nbsp; to &nbsp;
+                                        <span>End: </span> {selectedDate[1].toDateString()}
+                                    </p>
+                                    <label>Number of guests:</label>
+                                    <input
+                                    className="bg-background border-b border-accent ml-3 px-2 leading-tight"
+                                    type="number"
+                                    value={numGuests}
+                                    onChange={handleNumGuestsChange}
+                                    min="1"
+                                    max={data.maxGuests}
+                                    />
+                                    <button type="submit" className="bg-cta">Add booking!</button>
+                                </div>
+                            )}
+                        </div>
+                    </form>
 
-                />
                 </div>
                 )}
             </div>
