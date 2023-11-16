@@ -57,11 +57,11 @@ function Login() {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <label>Email:</label>
-                    <Controller name="email" control={control} rules={{ required: 'Name is required' }} render={({ field }) => <input {...field} required type="text" />}/>
+                    <Controller name="email" control={control} rules={{ required: 'Name is required' }} render={({ field }) => <input className="bg-background border-b border-accent ml-3 px-2 leading-tight" {...field} required type="text" />}/>
                 </div>
                 <div>
                     <label>Password:</label>
-                    <Controller name="password" control={control} rules={{ required: 'Name is required' }} render={({ field }) => <input {...field} type="text" required/>}/>
+                    <Controller name="password" control={control} rules={{ required: 'Name is required' }} render={({ field }) => <input {...field} className="bg-background border-b border-accent ml-3 px-2 leading-tight" type="text" required/>}/>
                 </div>
                 <div>
                     <button disabled={isSubmitting}  className="bg-cta" type="Submit">Submit</button>
