@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { API_HOST_URL } from "../../storage/constants";
 import Logout from "../../storage/logout/logout";
+import useAPI from "../../storage/getApi";
 
 
 
@@ -20,6 +21,31 @@ function Profile() {
     });
 
     const path = `/profiles/${user.name}/media`
+
+    const [bookings, setBookings] = useState([])
+
+    const handleShowBookings = async (data) => {
+        try {
+            const response = await fetch(`${API_HOST_URL}/profiles/${user.name}?_bookings=true`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+            })
+            if (response.ok) {
+                
+                    const data = await response.json();
+                    setBookings(data.bookings || []);
+                
+            } else {
+                console.error("Fetching bookings failed");
+            }
+        } catch (error) {
+            console.error("Error", error)
+        }
+    }
+        
 
     const onSubmit = async (data) => {
         try {
@@ -46,26 +72,41 @@ function Profile() {
 
     return (
         <div>
-            <h1>Welcome back {user.name}</h1>
+            <h1 className="text-2xl font-['Playfair_Display_SC']">Welcome back {user.name}</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <label>Your username: </label>
-                    <Controller name="name" control={control}  render={({ field }) => <input placeholder={`${user.name}`} {...field} disabled required type="text" />}/>
+                    <Controller name="name" control={control}  render={({ field }) => <input placeholder={`${user.name}`} {...field} disabled required type="text" className="bg-background border-b border-accent ml-3 px-2 leading-tight"/>}/>
                 </div>
                 <div>
                     <label>Your email: </label>
-                    <Controller name="email" control={control}  render={({ field }) => <input placeholder={`${user.email}`} disabled {...field} required type="text" />}/>
+                    <Controller name="email" control={control}  render={({ field }) => <input placeholder={`${user.email}`} disabled {...field} required type="text" className="bg-background border-b border-accent ml-3 px-2 leading-tight"/>}/>
                 </div>
                 <div className="p-3">
                     <div>
                         <h3>Change avatar:</h3>
-                        <p>Current avatar: {user.avatar}</p>
+                        <p>Current avatar: <span className="bg-background border-b border-accent ml-3 px-2 leading-tight">{user.avatar}</span></p>
                         <label>Avatar:</label>
-                        <Controller name="avatar"  control={control} render={({ field }) => <input {...field} type="url" className="bg-slate-500" />}/>
+                        <Controller name="avatar"  control={control} render={({ field }) => <input {...field} type="url" className="bg-background border-b border-accent ml-3 px-2 leading-tight " />}/>
                     </div>
-                <button className="bg-cta">Update avatar</button>
+                <button className="bg-cta mt-2">Update avatar</button>
                 </div>
             </form>
+            <div>
+                <button className="bg-cta" onClick={handleShowBookings}>Show my bookings</button>
+                {bookings.map((booking) => (
+                    <div key={booking.id}>
+                        <p>
+                            <strong className="font-['Playfair_Display_SC'">Venue Name:</strong> {booking.venue.name}
+                        </p>
+                        <p>
+                            <strong>Booking ID:</strong> {booking.id}
+                        </p>
+                        <hr />
+                    </div>
+                ))}
+            </div>
+
             <Logout />
         </div>
 
