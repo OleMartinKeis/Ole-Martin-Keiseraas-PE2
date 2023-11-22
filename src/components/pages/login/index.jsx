@@ -55,13 +55,13 @@ function Login() {
     return (
         <div className="flex flex-col justify-center items-center content-center h-screen">
             <div className="flex flex-col items-center">
-                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-row mb-8">
-                    <div className="flex mb-2">
+                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5 mb-8">
+                    <div className="flex gap-5 ml-2 mb-4">
                         <label className="pr-2">Email:</label>
-                        <Controller name="email" control={control} rules={{ required: 'Name is required' }} render={({ field }) => <input className="bg-background border-b border-accent pr-4 w-full leading-tight" {...field} required type="text" />}/>
+                        <Controller name="email" control={control} rules={{ required: 'Name is required' }} render={({ field }) => <input className="bg-background border-b border-accent w-full  px-2 pr-4 leading-tight" {...field} required type="text" />}/>
                     </div>
-                    <div className="flex mb-2">
-                        <label className="ml-2 w-20">Password:</label>
+                    <div className="flex mb-5">
+                        <label className=" ml-2 w-20">Password:</label>
                         <Controller name="password" control={control} rules={{ required: 'Name is required' }} render={({ field }) => <input {...field} className="bg-background border-b border-accent px-2 leading-tight" type="text" required/>}/>
                     </div>
                     <div>
@@ -73,7 +73,7 @@ function Login() {
                 </div>
             </div>
             <div className="ml-1 mt-8 w-100">
-                <h2 className="text-2xl font-['Playfair_Display_SC']mb-4">FAQ</h2>
+                <h2 className="text-2xl font-['Playfair_Display_SC'] mb-4">FAQ</h2>
                 <div className="border-accent border-b w-100 p-4 mb-4">
                 <h3 className="text-xl">What is VenueVista?</h3>
                 <p className="px-2">VenueVista is a school project for Noroffs Exam for Front-end Developers</p>
