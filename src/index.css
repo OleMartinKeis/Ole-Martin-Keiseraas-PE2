@@ -163,3 +163,20 @@
 ::-webkit-calendar-picker-indicator {
     filter: invert(1);
 }
+
+body{
+    font-family: Lato, Arial, Helvetica, sans-serif;
+}
+
+.customCheckbox[type="checkbox"] {
+    padding: 8px; /* Add padding to the checkbox */
+    border: 1px solid #3df5ff; /* Set border color */
+    background-color: #2d3748; /* Set background color */
+    color: #3df5ff; /* Set text color */
+}
+
+.customCheckbox[type="checkbox"]:checked {
+    background-color: #4299e1; 
+    border-color: #4299e1; 
+    color: #3df5ff; 
+}
