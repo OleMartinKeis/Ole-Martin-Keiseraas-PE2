@@ -181,7 +181,7 @@ function Venue() {
                         <span>End: </span> {selectedDate[1].toDateString()}
                       </p>
                       <div className="mb-3">
-                        <label>Number of guests:</label>
+                        <label htmlFor="number">Number of guests:</label>
                         <input
                           className="bg-background border-b border-accent ml-1 px-2 leading-tight"
                           type="number"
@@ -217,6 +217,7 @@ function Venue() {
                   <span className="sr-only">{property}</span>
                 </i>
                 <input
+                  name={property}
                   type="checkbox"
                   disabled
                   checked={data.meta[property]}
