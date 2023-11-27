@@ -3,6 +3,7 @@ import useAPI from "../../storage/getApi";
 import { API_HOST_URL } from "../../storage/constants";
 import VenueSearch from "./venueSearch.jsx";
 import { useAuth } from "../../storage/authentication/index.jsx";
+import { Link } from "react-router-dom";
 
 function Home() {
   const { data: allVenues } = useAPI(
@@ -100,9 +101,9 @@ function Home() {
         <h2 className="text-xl mt-2 mb-2 md:ml-4">Our highest rated venues:</h2>
         {!isAuthenticated && !user && (
           <p className=" text-center text-white mb-4">
-            <a href="/login" className="border-accent border-b text-accent">
+            <Link href="/login" className="border-accent border-b text-accent">
               Log in
-            </a>
+            </Link>
             <span> </span>to view listings
           </p>
         )}
