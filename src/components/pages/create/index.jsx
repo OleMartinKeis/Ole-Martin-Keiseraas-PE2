@@ -66,144 +66,274 @@ function Create() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label>Name of venue:</label>
-          <Controller
-            name="name"
-            control={control}
-            rules={{ required: "Name is required" }}
-            render={({ field }) => (
-              <input className="text-text" {...field} required type="text" />
-            )}
-          />
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col text-center"
+      >
+        <div className="flex flex-col">
+          <div className="mt-8 md:mt-2">
+            <label htmlFor="name">Name of venue:</label>
+            <Controller
+              name="name"
+              control={control}
+              rules={{ required: "Name is required" }}
+              render={({ field }) => (
+                <input
+                  className="bg-background border-b border-accent ml-3 px-2 leading-tight"
+                  {...field}
+                  required
+                  type="text"
+                />
+              )}
+            />
+          </div>
+          <div className="mt-2">
+            <label htmlFor="description ">
+              Describe the venue:
+              <span className="opacity-50 text-xs">
+                (location, facilities, etc)
+              </span>
+            </label>
+            <Controller
+              name="description"
+              control={control}
+              rules={{ required: "Description is required" }}
+              render={({ field }) => (
+                <textarea
+                  className="bg-background border-b border-accent ml-2 px-2 leading-tight h-auto"
+                  {...field}
+                  required
+                  type="text"
+                />
+              )}
+            />
+          </div>
         </div>
-        <div>
-          <label>
-            Describe the venue:
-            <span className="opacity-50">(location, facilities, etc)</span>
-          </label>
-          <Controller
-            name="description"
-            control={control}
-            rules={{ required: "Description is required" }}
-            render={({ field }) => (
-              <input className="text-text" {...field} required type="text" />
-            )}
-          />
+        <div className="mt-6">
+          <label htmlFor="media">Media</label>
+          {[1, 2, 3].map((index) => (
+            <Controller
+              name={`media-${index}`}
+              control={control}
+              render={({ field }) => (
+                <input
+                  className="bg-background border-b border-accent ml-3 px-2 leading-tight"
+                  {...field}
+                  onChange={(e) => addMediaUrl(e.target.value, index - 1)}
+                  type="url"
+                  required={index === 1}
+                />
+              )}
+            />
+          ))}
         </div>
-        <div>
-          <label>Media</label>
-          <Controller
-            name="media-1"
-            control={control}
-            render={({ field }) => (
-              <input
-                className="text-text"
-                {...field}
-                onChange={(e) => addMediaUrl(e.target.value)}
-                type="url"
-                required
+        <div className="flex flex-col mt-6 md:flex-row justify-center">
+          <div>
+            <label htmlFor="rating">Rating:</label>
+            <Controller
+              name="rating"
+              control={control}
+              render={({ field }) => (
+                <input
+                  className="bg-background border-b border-accent ml-3 px-2 leading-tight w-10"
+                  {...field}
+                  type="number"
+                />
+              )}
+            />
+          </div>
+          <div>
+            <label htmlFor="price">Price per night in NOK:</label>
+            <Controller
+              name="price"
+              control={control}
+              render={({ field }) => (
+                <input
+                  className="bg-background border-b border-accent ml-3 px-2 leading-tight w-16"
+                  {...field}
+                  required
+                  type="number"
+                />
+              )}
+            />
+          </div>
+          <div>
+            <label htmlFor="maxGuests">Max guests:</label>
+            <Controller
+              name="maxGuests"
+              control={control}
+              render={({ field }) => (
+                <input
+                  className="bg-background border-b border-accent ml-3 px-2 leading-tight w-10"
+                  {...field}
+                  type="number"
+                  required
+                />
+              )}
+            />
+          </div>
+        </div>
+        <div className="flex flex-row justify-center mt-6">
+          <div>
+            <div>
+              <label htmlFor="wifi">Wifi:</label>
+              <Controller
+                name="wifi"
+                control={control}
+                render={({ field }) => (
+                  <input className="text-text" {...field} type="checkbox" />
+                )}
               />
-            )}
-          />
-        </div>
-        <div>
-          <label>Media</label>
-          <Controller
-            name="media-2"
-            control={control}
-            render={({ field }) => (
-              <input className="text-text" {...field} type="url" />
-            )}
-          />
-        </div>
-        <div>
-          <label>Media</label>
-          <Controller
-            name="media-3"
-            control={control}
-            render={({ field }) => (
-              <input className="text-text" {...field} type="url" />
-            )}
-          />
-        </div>
-        <div>
-          <label>Rating:</label>
-          <Controller
-            name="rating"
-            control={control}
-            render={({ field }) => (
-              <input className="text-text" {...field} type="number" />
-            )}
-          />
-        </div>
-        <div>
-          <label>Price per night in NOK:</label>
-          <Controller
-            name="price"
-            control={control}
-            render={({ field }) => (
-              <input className="text-text" {...field} required type="number" />
-            )}
-          />
-        </div>
-        <div>
-          <label>Max guests:</label>
-          <Controller
-            name="maxGuests"
-            control={control}
-            render={({ field }) => (
-              <input className="text-text" {...field} type="number" required />
-            )}
-          />
-        </div>
-        <div>
-          <div>
-            <label>Wifi:</label>
-            <Controller
-              name="wifi"
-              control={control}
-              render={({ field }) => (
-                <input className="text-text" {...field} type="checkbox" />
-              )}
-            />
+            </div>
+            <div>
+              <label htmlFor="parking">Parking:</label>
+              <Controller
+                name="parking"
+                control={control}
+                render={({ field }) => (
+                  <input className="text-text" {...field} type="checkbox" />
+                )}
+              />
+            </div>
           </div>
-          <div>
-            <label>Parking:</label>
-            <Controller
-              name="parking"
-              control={control}
-              render={({ field }) => (
-                <input className="text-text" {...field} type="checkbox" />
-              )}
-            />
-          </div>
-          <div>
-            <label>Breakfast:</label>
-            <Controller
-              name="breakfast"
-              control={control}
-              render={({ field }) => (
-                <input className="text-text" {...field} type="checkbox" />
-              )}
-            />
-          </div>
-          <div>
-            <label>Pets:</label>
-            <Controller
-              name="pets"
-              control={control}
-              render={({ field }) => (
-                <input className="text-text" {...field} type="checkbox" />
-              )}
-            />
+          <div className="flex flex-col">
+            <div>
+              <label htmlFor="breakfast">Breakfast:</label>
+              <Controller
+                name="breakfast"
+                control={control}
+                render={({ field }) => (
+                  <input className="text-text" {...field} type="checkbox" />
+                )}
+              />
+            </div>
+            <div>
+              <label htmlFor="pets">Pets:</label>
+              <Controller
+                name="pets"
+                control={control}
+                render={({ field }) => (
+                  <input className="text-text" {...field} type="checkbox" />
+                )}
+              />
+            </div>
           </div>
         </div>
-
-        <div>
-          <button disabled={isSubmitting} className="bg-cta" type="Submit">
-            Register
+        <div className="mt-6">
+          <div>
+            <div>
+              <div>
+                <label htmlFor="country">Country</label>
+                <Controller
+                  name="country"
+                  control={control}
+                  render={({ field }) => (
+                    <input
+                      className="bg-background border-b border-accent ml-3 px-2 leading-tight"
+                      {...field}
+                      type="text"
+                    />
+                  )}
+                />
+              </div>
+              <div>
+                <label htmlFor="continent">Continent</label>
+                <Controller
+                  name="continent"
+                  control={control}
+                  render={({ field }) => (
+                    <input
+                      className="bg-background border-b border-accent ml-3 px-2 leading-tight"
+                      {...field}
+                      type="text"
+                    />
+                  )}
+                />
+              </div>
+            </div>
+            <div className="mt-6">
+              <div>
+                <label htmlFor="city">City</label>
+                <Controller
+                  name="city"
+                  control={control}
+                  render={({ field }) => (
+                    <input
+                      className="bg-background border-b border-accent ml-3 px-2 leading-tight"
+                      {...field}
+                      type="text"
+                    />
+                  )}
+                />
+              </div>
+              <div>
+                <label htmlFor="zip">Zip</label>
+                <Controller
+                  name="zip"
+                  control={control}
+                  render={({ field }) => (
+                    <input
+                      className="bg-background border-b border-accent ml-3 px-2 leading-tight"
+                      {...field}
+                      type="text"
+                    />
+                  )}
+                />
+              </div>
+              <div>
+                <label htmlFor="Address">Address</label>
+                <Controller
+                  name="Address"
+                  control={control}
+                  render={({ field }) => (
+                    <input
+                      className="bg-background border-b border-accent ml-3 px-2 leading-tight"
+                      {...field}
+                      type="text"
+                    />
+                  )}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="mt-6 flex flex-col md:flex-row md:justify-center">
+            <div>
+              <label htmlFor="latitude">Latitude</label>
+              <Controller
+                name="latitude"
+                control={control}
+                render={({ field }) => (
+                  <input
+                    className="bg-background border-b border-accent ml-3 px-2 leading-tight"
+                    {...field}
+                    type="text"
+                  />
+                )}
+              />
+            </div>
+            <div className="md:ml-5">
+              <label htmlFor="longitude">Longitude</label>
+              <Controller
+                name="longitude"
+                control={control}
+                render={({ field }) => (
+                  <input
+                    className="bg-background border-b border-accent ml-3 px-2 leading-tight"
+                    {...field}
+                    type="text"
+                  />
+                )}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="mt-4">
+          <button
+            disabled={isSubmitting}
+            className="bg-cta text-white ml-2 text-sm p-1 rounded-md"
+            type="Submit"
+          >
+            Update post
           </button>
         </div>
       </form>
