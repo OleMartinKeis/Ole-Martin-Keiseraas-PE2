@@ -101,7 +101,7 @@ function Home() {
         <h2 className="text-xl mt-2 mb-2 md:ml-4">Our highest rated venues:</h2>
         {!isAuthenticated && !user && (
           <p className=" text-center text-white mb-4">
-            <Link href="/login" className="border-accent border-b text-accent">
+            <Link to="/login" className="border-accent border-b text-accent">
               Log in
             </Link>
             <span> </span>to view listings
