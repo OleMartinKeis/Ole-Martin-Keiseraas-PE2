@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import useAPI from "../../storage/getApi";
 import { API_HOST_URL } from "../../storage/constants";
 import VenueSearch from "./venueSearch.jsx";
+import { useAuth } from "../../storage/authentication/index.jsx";
 
 function Home() {
   const { data: allVenues } = useAPI(
@@ -9,6 +10,8 @@ function Home() {
   );
   const [filteredVenues, setFilteredVenues] = useState(allVenues);
   const [noResults, setNoResults] = useState(false);
+  const { isAuthenticated } = useAuth();
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const metaLabels = {
     wifi: "fa-wifi",
@@ -95,6 +98,14 @@ function Home() {
       </div>
       <div>
         <h2 className="text-xl mt-2 mb-2 md:ml-4">Our highest rated venues:</h2>
+        {!isAuthenticated && !user && (
+          <p className=" text-center text-white mb-4">
+            <a href="/login" className="border-accent border-b text-accent">
+              Log in
+            </a>
+            <span> </span>to view listings
+          </p>
+        )}
       </div>
       <div className="flex m-auto place-content-center flex-wrap gap-8 max-w-7xl">
         {filteredVenues.length > 0
@@ -203,12 +214,14 @@ function Home() {
                       )}
                     </form>
                     <div className="flex justify-end">
-                      <a
-                        href={`/venues/${item.id}`}
-                        className="flex-col rounded-md mt-2 bg-cta text-white text-sm p-1"
-                      >
-                        View Venue
-                      </a>
+                      {user && isAuthenticated && (
+                        <a
+                          href={`/venues/${item.id}`}
+                          className="flex-col rounded-md mt-2 bg-cta text-white text-sm p-1"
+                        >
+                          View Venue
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
