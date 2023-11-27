@@ -7,6 +7,8 @@ import { useAuth } from "../../storage/authentication";
 const path = "/auth/login";
 
 function Login() {
+  const [loginError, setLoginError] = useState(null);
+
   const { setIsAuthenticated } = useAuth();
 
   const toHome = useNavigate();
@@ -42,10 +44,21 @@ function Login() {
         setIsAuthenticated(true);
         toHome("/");
       } else {
-        console.error("Login failed");
+        const errorData = await response.json();
+        if (errorData.errors && errorData.errors.length > 0) {
+          const fieldErrors = {};
+          errorData.errors.forEach((error) => {
+            const fieldName = error.path ? error.path[0] : "nonFieldError";
+            fieldErrors[fieldName] = error.message;
+          });
+          setLoginError(fieldErrors);
+        } else {
+          setLoginError(errorData.message || "Login failed");
+        }
       }
     } catch (error) {
       console.error("Error: ", error);
+      setLoginError("An unexpected error occured");
     }
   };
 
@@ -92,10 +105,21 @@ function Login() {
               )}
             />
           </div>
+          <div className="">
+            {loginError && (
+              <div className="bg-text p-1 rounded-md border-accent border text-center">
+                {Object.keys(loginError).map((fieldName) => (
+                  <p key={fieldName} className="text-sm text-red-500">
+                    {loginError[fieldName]}
+                  </p>
+                ))}
+              </div>
+            )}
+          </div>
           <div>
             <button
               disabled={isSubmitting}
-              className="ml-4 w-full bg-cta p-1 rounded-md"
+              className=" w-full bg-cta p-1 rounded-md"
               type="Submit"
             >
               Submit

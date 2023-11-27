@@ -7,6 +7,7 @@ const path = "/auth/register";
 
 function Register() {
   const [isVenueManager, setIsVenueManager] = useState(false);
+  const [registrationError, setRegistrationError] = useState(null);
   const { control, handleSubmit, formState } = useForm({
     defaultValues: {
       name: "",
@@ -36,10 +37,22 @@ function Register() {
       if (response.ok) {
         toLogin("/login");
       } else {
-        console.error("Registration failed");
+        const errorData = await response.json();
+
+        if (errorData.errors && errorData.errors.length > 0) {
+          const fieldErrors = {};
+          errorData.errors.forEach((error) => {
+            const fieldName = error.path[0];
+            fieldErrors[fieldName] = error.message;
+          });
+          setRegistrationError(fieldErrors);
+        } else {
+          setRegistrationError(errorData.message || "Registration failed");
+        }
       }
     } catch (error) {
       console.error("Error: ", error);
+      setRegistrationError("An unexpected error occured");
     }
   };
 
@@ -157,6 +170,17 @@ function Register() {
                   Terms & Service
                 </a>
               </p>
+            )}
+          </div>
+          <div className="">
+            {registrationError && (
+              <div className="bg-text p-1 rounded-md border-accent border text-center">
+                {Object.keys(registrationError).map((fieldName) => (
+                  <p key={fieldName} className="text-sm text-red-500">
+                    {registrationError[fieldName]}
+                  </p>
+                ))}
+              </div>
             )}
           </div>
           <div>

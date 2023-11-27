@@ -68,7 +68,7 @@ function Profile() {
         const updatedUser = { ...user, avatar: data.avatar };
         localStorage.setItem("user", JSON.stringify(updatedUser));
       } else {
-        console.error("Registration failed");
+        console.error("Getting profile failed");
       }
     } catch (error) {
       console.error("Error: ", error);
@@ -105,7 +105,7 @@ function Profile() {
           <div className="pb-2 pt-0 md:max-w-md rounded-xl text-black m-auto">
             <div className="ml-2 mt-5 mb-5 text-white">
               <div>
-                <label>
+                <label htmlFor="name">
                   <span className="sr-only">Your username:</span>
                 </label>
                 <Controller
@@ -124,7 +124,7 @@ function Profile() {
                 />
               </div>
               <div>
-                <label>
+                <label htmlFor="email">
                   <span className="sr-only">Your email:</span>
                 </label>
                 <Controller
@@ -141,9 +141,6 @@ function Profile() {
                     />
                   )}
                 />
-              </div>
-              <div>
-                <div></div>
               </div>
             </div>
           </div>
