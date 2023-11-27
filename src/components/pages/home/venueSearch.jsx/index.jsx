@@ -59,7 +59,10 @@ function VenueSearch({ onSearch }) {
         />
       </div>
       <div className="mt-4 m-auto text-sm">
-        <label className="bg-background text-white border-b border-accent ml-3 px-2 leading-tight">
+        <label
+          htmlFor="wifi"
+          className="bg-background text-white border-b border-accent ml-3 px-2 leading-tight"
+        >
           <input
             type="checkbox"
             name="wifi"
@@ -68,7 +71,10 @@ function VenueSearch({ onSearch }) {
           />
           Wifi
         </label>
-        <label className="bg-background text-white border-b border-accent ml-3 px-2 leading-tight">
+        <label
+          htmlFor="breakfast"
+          className="bg-background text-white border-b border-accent ml-3 px-2 leading-tight"
+        >
           <input
             type="checkbox"
             name="breakfast"
@@ -77,7 +83,10 @@ function VenueSearch({ onSearch }) {
           />
           Breakfast
         </label>
-        <label className="bg-background text-white border-b border-accent ml-3 px-2 leading-tight">
+        <label
+          htmlFor="parking"
+          className="bg-background text-white border-b border-accent ml-3 px-2 leading-tight"
+        >
           <input
             type="checkbox"
             name="parking"
@@ -86,7 +95,10 @@ function VenueSearch({ onSearch }) {
           />
           Parking
         </label>
-        <label className="bg-background text-white border-b border-accent ml-3 px-2 leading-tight">
+        <label
+          htmlFor="pets"
+          className="bg-background text-white border-b border-accent ml-3 px-2 leading-tight"
+        >
           <input
             type="checkbox"
             name="pets"
