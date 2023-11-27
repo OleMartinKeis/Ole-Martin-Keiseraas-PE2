@@ -1,10 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { API_HOST_URL } from "../../storage/constants";
 import Delete from "./delete";
 import { Link } from "react-router-dom";
-
-const user = JSON.parse(localStorage.getItem("user"));
-const path = `/profiles/${user.name}/venues`;
 
 function ManageVenues() {
   const [venues, setVenues] = useState([]);
@@ -12,6 +9,7 @@ function ManageVenues() {
   const authToken = localStorage.getItem("token");
   const userData = localStorage.getItem("user");
   const user = JSON.parse(userData);
+  const [path, setPath] = useState("/home");
 
   const handleShowVenues = async () => {
     if (showVenues) {
@@ -36,6 +34,12 @@ function ManageVenues() {
       }
     }
   };
+
+  useEffect(() => {
+    if (user && user.name) {
+      setPath(`/profiles/${user.name}/venues`);
+    }
+  });
 
   return (
     <div>
