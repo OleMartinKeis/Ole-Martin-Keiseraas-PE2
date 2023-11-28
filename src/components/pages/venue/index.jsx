@@ -11,6 +11,8 @@ function Venue() {
   );
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [numGuests, setNumGuests] = useState(1);
+  const [bookingError, setBookingError] = useState(null);
+  const [bookingStatus, setBookingStatus] = useState(null);
   const token = localStorage.getItem("token");
 
   const metaLabels = {
@@ -52,12 +54,21 @@ function Venue() {
 
       if (response.ok) {
         console.log("Booking added successfully!");
+        setBookingStatus("success");
       } else {
-        console.log(token);
-        console.error("Error adding booking:", response.statusText);
+        const errorData = await response.json();
+        if (errorData.errors && errorData.errors.length > 0) {
+          const errorMessages = errorData.errors.map((error) => error.message);
+          setBookingError(errorMessages.join(", "));
+        } else {
+          setBookingError(errorData.message || "Booking failed");
+        }
+        setBookingStatus("error");
       }
     } catch (error) {
       console.error("Error adding booking:", error.message);
+      setBookingError("An unexpected error occured");
+      setBookingStatus("error");
     }
   };
 
@@ -173,7 +184,6 @@ function Venue() {
                     <div>
                       <p>
                         <span>Start: </span>
-
                         {selectedDate[0].toDateString()}
                       </p>
                       <p>&nbsp; to &nbsp;</p>
@@ -185,9 +195,9 @@ function Venue() {
                         <input
                           className="bg-background border-b border-accent ml-1 px-2 leading-tight"
                           type="number"
+                          min="1"
                           value={numGuests}
                           onChange={handleNumGuestsChange}
-                          min="1"
                           max={data.maxGuests}
                         />
 
@@ -197,6 +207,16 @@ function Venue() {
                         >
                           Add booking!
                         </button>
+                        {bookingStatus === "success" && (
+                          <p className="text-accent text-sm mt-2">
+                            Booking added successfully!
+                          </p>
+                        )}
+                        {bookingStatus === "error" && (
+                          <p className="text-red-500 text-sm mt-2">
+                            {bookingError}
+                          </p>
+                        )}
                       </div>
                     </div>
                   )}
