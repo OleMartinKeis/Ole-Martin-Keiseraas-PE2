@@ -129,12 +129,12 @@ function Login() {
         <div className="flex flex-col mt-8">
           <p className="mb-2">
             Still not a member, or want to create a Venue Manager* account?{" "}
-            <a
+            <Link
               className="border-accent border-b text-gray-200"
-              href="/register"
+              to="/register"
             >
               Click here to register
-            </a>
+            </Link>
             <span className="opacity-50 text-sm ml-2">
               *To rent out a venue, you need a Venue Manager account
             </span>
@@ -155,7 +155,8 @@ function Login() {
         <div className="border-b border-accent w-100 p-4">
           <h3 className="sm:text-base md:text-xl">Who created VenueVista?</h3>
           <p className="px-2 text-xs sm:text-sm md:text-base">
-            VenueVista is created by Ole Martin Keiseraas, check out my{" "}
+            VenueVista is created by Ole Martin Keiseraas, check out my
+            <span> </span>
             <a
               className="border-b border-accent"
               href="https://github.com/OleMartinKeis"
