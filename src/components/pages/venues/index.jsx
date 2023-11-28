@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { API_HOST_URL } from "../../storage/constants";
 import useAPI from "../../storage/getApi";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const path = "/venues";
 
@@ -35,6 +36,9 @@ function Venues() {
 
   return (
     <div className="w-100">
+      <Helmet>
+        <title>Venues | VenueVista</title>
+      </Helmet>
       <div className="flex place-content-center">
         <input
           type="text"

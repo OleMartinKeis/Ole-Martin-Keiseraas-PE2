@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { API_HOST_URL } from "../../storage/constants";
 import Delete from "./delete";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 function ManageVenues() {
   const [venues, setVenues] = useState([]);
@@ -43,6 +44,9 @@ function ManageVenues() {
 
   return (
     <div>
+      <Helmet>
+        <title>Manager panel | VenueVista</title>
+      </Helmet>
       <div className=" bg-gradient-to-b from-primary from-10% to-bg h-40"></div>
       <h2 className="text-lg md:text-xl text-center pt-20 font-['Playfair_Display_SC']">
         Welcome back {user.name}, to your manager panel

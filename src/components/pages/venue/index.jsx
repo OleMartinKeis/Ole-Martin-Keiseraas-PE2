@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import useAPI from "../../storage/getApi";
 import { API_HOST_URL } from "../../storage/constants";
 import Calendar from "react-calendar";
+import { Helmet } from "react-helmet";
 
 function Venue() {
   const { id } = useParams();
@@ -78,6 +79,10 @@ function Venue() {
 
   return (
     <div className="font-sans">
+      <Helmet>
+        ( <title>{`${data.name} | VenueVista`}</title>)
+      </Helmet>
+
       <div className="pt-8 pb-2 border-t border-accent bg-primary">
         <h1 className=" text-lg text-text md:text-2xl ml-6 font-['Playfair_Display_SC']">
           {data.name}

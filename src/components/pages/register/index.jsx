@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { API_HOST_URL } from "../../storage/constants";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const path = "/auth/register";
 
@@ -62,6 +63,7 @@ function Register() {
 
   return (
     <div>
+      <Helmet>Register | VenueVista</Helmet>
       <h1 className="sm:text-lg md:text-xl lg:text-2xl text-center pt-6 font-['Playfair_Display_SC'] ">
         Your dream location is just a few steps away
       </h1>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { API_HOST_URL } from "../../storage/constants";
 import Logout from "../../storage/logout/logout";
+import { Helmet } from "react-helmet";
 
 function Profile() {
   const userData = localStorage.getItem("user");
@@ -77,6 +78,9 @@ function Profile() {
 
   return (
     <div>
+      <Helmet>
+        <title>Profile | VenueVista</title>
+      </Helmet>
       <div className="relative h-550px">
         <div
           className="shadow-2xl inset-0 bg-cover bg-center text-center border-b border-accent"

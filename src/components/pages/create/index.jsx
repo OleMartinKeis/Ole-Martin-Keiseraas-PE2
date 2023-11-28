@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { API_HOST_URL } from "../../storage/constants";
 import { useForm, Controller } from "react-hook-form";
 import { useAuth } from "../../storage/authentication";
+import { Helmet } from "react-helmet";
 
 function Create() {
   const path = "/venues";
@@ -66,6 +67,9 @@ function Create() {
 
   return (
     <div>
+      <Helmet>
+        <title>Create | VenueVista</title>
+      </Helmet>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col text-center"

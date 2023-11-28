@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { API_HOST_URL } from "../../../storage/constants";
+import { Helmet } from "react-helmet";
 
 function Edit() {
   const { id } = useParams();
@@ -116,6 +117,9 @@ function Edit() {
 
   return (
     <div>
+      <Helmet>
+        <title>Update | VenueVista</title>
+      </Helmet>
       <h1 className="text-xl md:text-2xl font-['Playfair_Display_SC']">
         Update Venue
       </h1>

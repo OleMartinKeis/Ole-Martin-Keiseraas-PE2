@@ -4,6 +4,7 @@ import { API_HOST_URL } from "../../storage/constants";
 import VenueSearch from "./venueSearch.jsx";
 import { useAuth } from "../../storage/authentication/index.jsx";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 function Home() {
   const { data: allVenues } = useAPI(
@@ -71,6 +72,9 @@ function Home() {
 
   return (
     <div className="w-100">
+      <Helmet>
+        <title>Home | VenueVista</title>
+      </Helmet>
       <div className="bg-gradient-to-b from-primary from-10% to-bg ">
         <div className="flex place-content-center w-100">
           <div

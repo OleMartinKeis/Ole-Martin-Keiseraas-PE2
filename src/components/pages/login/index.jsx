@@ -64,6 +64,9 @@ function Login() {
 
   return (
     <div className="flex flex-col justify-center items-center content-center h-screen">
+      <Helmet>
+        <title>Log in | VenueVista</title>
+      </Helmet>
       <div className="flex flex-col items-center">
         <form
           onSubmit={handleSubmit(onSubmit)}
