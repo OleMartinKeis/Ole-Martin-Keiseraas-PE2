@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { API_HOST_URL } from "../../storage/constants";
 import useAPI from "../../storage/getApi";
+import { Link } from "react-router-dom";
 
 const path = "/venues";
 
@@ -47,7 +48,7 @@ function Venues() {
       <div className="flex place-content-center flex-wrap basis-3">
         {filteredData.map((item) => (
           <div key={item.id} className="flex p-4 border-2 max-w-sm">
-            <a href={`/venues/${item.id}`}>
+            <Link to={`/venues/${item.id}`}>
               <div className="">
                 <h2 className="text-xl">{item.name}</h2>
                 <div className="w-64 h-64">
@@ -62,7 +63,7 @@ function Venues() {
                   </p>
                 </div>
               </div>
-            </a>
+            </Link>
           </div>
         ))}
       </div>
