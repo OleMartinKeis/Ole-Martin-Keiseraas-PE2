@@ -159,7 +159,7 @@ function Home() {
                     <div className="flex justify-end">
                       {user && isAuthenticated && (
                         <Link
-                          href={`/venues/${item.id}`}
+                          to={`/venues/${item.id}`}
                           className="flex-col rounded-md mt-2 bg-cta text-white text-sm p-1"
                         >
                           View Venue
@@ -219,7 +219,7 @@ function Home() {
                     <div className="flex justify-end">
                       {user && isAuthenticated && (
                         <Link
-                          href={`/venues/${item.id}`}
+                          to={`/venues/${item.id}`}
                           className="flex-col rounded-md mt-2 bg-cta text-white text-sm p-1"
                         >
                           View Venue
