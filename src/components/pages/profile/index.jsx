@@ -146,7 +146,7 @@ function Profile() {
           </div>
           <div className="flex flex-col  align-middle md:ml-2">
             <button
-              className="rounded-md mt-2 bg-cta  text-white text-sm p-1 hover:border-accent hover:border hover:shadow-lg hover:text-background hover:bg-primary"
+              className="rounded-md mt-2 bg-cta border-cta border  text-white text-sm p-1 hover:border-accent hover:border hover:shadow-lg hover:text-background hover:bg-primary"
               onClick={handleShowBookings}
             >
               {showBookings ? "Hide My Bookings" : "Show My Bookings"}
