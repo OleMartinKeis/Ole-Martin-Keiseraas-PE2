@@ -207,7 +207,8 @@ function Register() {
           <div className="border-b border-accent w-100 p-4">
             <h3 className="sm:text-base md:text-xl">Who created VenueVista?</h3>
             <p className="px-2 text-xs sm:text-sm md:text-base">
-              VenueVista is created by Ole Martin Keiseraas, check out my
+              VenueVista is created by Ole Martin Keiseraas, check out my{" "}
+              <span> </span>
               <a
                 className="border-b border-accent"
                 href="https://github.com/OleMartinKeis"
