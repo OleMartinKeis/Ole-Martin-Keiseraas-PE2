@@ -391,7 +391,11 @@ function Edit() {
           </div>
         </div>
         <div className="mt-4">
-          <button disabled={isSubmitting} className="bg-cta" type="Submit">
+          <button
+            disabled={isSubmitting}
+            className="rounded-md mt-2 bg-cta border-cta border  text-white text-sm p-1 hover:border-accent hover:border hover:shadow-lg hover:text-background hover:bg-primary"
+            type="Submit"
+          >
             Update post
           </button>
         </div>

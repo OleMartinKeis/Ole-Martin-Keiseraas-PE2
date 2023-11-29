@@ -168,7 +168,7 @@ function Home() {
                       {user && isAuthenticated && (
                         <Link
                           to={`/venues/${item.id}`}
-                          className="flex-col rounded-md mt-2 bg-cta text-white text-sm p-1"
+                          className="flex-col rounded-md mt-2 bg-cta border-cta border  text-white text-sm p-1 hover:border-accent hover:border hover:shadow-lg hover:text-background hover:bg-primary"
                         >
                           View Venue
                         </Link>
@@ -228,7 +228,7 @@ function Home() {
                       {user && isAuthenticated && (
                         <Link
                           to={`/venues/${item.id}`}
-                          className="flex-col rounded-md mt-2 bg-cta text-white text-sm p-1"
+                          className="flex-col rounded-md mt-2 bg-cta border-cta border  text-white text-sm p-1 hover:border-accent hover:border hover:shadow-lg hover:text-background hover:bg-primary"
                         >
                           View Venue
                         </Link>

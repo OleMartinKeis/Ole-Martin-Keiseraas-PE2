@@ -338,7 +338,7 @@ function Create() {
         <div className="mt-4">
           <button
             disabled={isSubmitting}
-            className="bg-cta text-white ml-2 text-sm p-1 rounded-md"
+            className="rounded-md mt-2 bg-cta border-cta border  text-white text-sm p-1 hover:border-accent hover:border hover:shadow-lg hover:text-background hover:bg-primary ml-2"
             type="Submit"
           >
             Update post

@@ -212,7 +212,7 @@ function Venue() {
 
                         <button
                           type="submit"
-                          className="bg-cta text-white ml-2 text-sm p-1 rounded-md"
+                          className="rounded-md mt-2 bg-cta border-cta border  text-white text-sm p-1 hover:border-accent hover:border hover:shadow-lg hover:text-background hover:bg-primary"
                         >
                           Add booking!
                         </button>
