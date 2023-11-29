@@ -41,6 +41,23 @@ function Create() {
     data.maxGuests = parseFloat(data.maxGuests);
     data.rating = parseFloat(data.rating);
 
+    data.meta = {
+      wifi: data.wifi,
+      parking: data.parking,
+      breakfast: data.breakfast,
+      pets: data.pets,
+    };
+
+    data.location = {
+      address: data.address,
+      city: data.city,
+      zip: data.zip,
+      country: data.country,
+      continent: data.continent,
+      lat: parseFloat(data.lat),
+      lng: parseFloat(data.lng),
+    };
+
     try {
       const response = await fetch(`${API_HOST_URL}${path}`, {
         method: "POST",
@@ -289,9 +306,39 @@ function Create() {
                 />
               </div>
               <div>
-                <label htmlFor="Address">Address</label>
+                <label htmlFor="address">Address</label>
                 <Controller
-                  name="Address"
+                  name="address"
+                  control={control}
+                  render={({ field }) => (
+                    <input
+                      className="bg-background border-b border-accent ml-3 px-2 leading-tight"
+                      {...field}
+                      type="text"
+                    />
+                  )}
+                />
+              </div>
+            </div>
+            <div className="mt-6 flex flex-col md:flex-row md:justify-center">
+              <div>
+                <label htmlFor="lat">Latitude</label>
+                <Controller
+                  name="lat"
+                  control={control}
+                  render={({ field }) => (
+                    <input
+                      className="bg-background border-b border-accent ml-3 px-2 leading-tight"
+                      {...field}
+                      type="text"
+                    />
+                  )}
+                />
+              </div>
+              <div className="md:ml-5">
+                <label htmlFor="lng">Longitude</label>
+                <Controller
+                  name="lng"
                   control={control}
                   render={({ field }) => (
                     <input
@@ -304,36 +351,6 @@ function Create() {
               </div>
             </div>
           </div>
-          <div className="mt-6 flex flex-col md:flex-row md:justify-center">
-            <div>
-              <label htmlFor="latitude">Latitude</label>
-              <Controller
-                name="latitude"
-                control={control}
-                render={({ field }) => (
-                  <input
-                    className="bg-background border-b border-accent ml-3 px-2 leading-tight"
-                    {...field}
-                    type="text"
-                  />
-                )}
-              />
-            </div>
-            <div className="md:ml-5">
-              <label htmlFor="longitude">Longitude</label>
-              <Controller
-                name="longitude"
-                control={control}
-                render={({ field }) => (
-                  <input
-                    className="bg-background border-b border-accent ml-3 px-2 leading-tight"
-                    {...field}
-                    type="text"
-                  />
-                )}
-              />
-            </div>
-          </div>
         </div>
         <div className="mt-4">
           <button
@@ -341,7 +358,7 @@ function Create() {
             className="rounded-md mt-2 bg-cta border-cta border  text-white text-sm p-1 hover:border-accent hover:border hover:shadow-lg hover:text-background hover:bg-primary ml-2"
             type="Submit"
           >
-            Update post
+            Create post
           </button>
         </div>
       </form>

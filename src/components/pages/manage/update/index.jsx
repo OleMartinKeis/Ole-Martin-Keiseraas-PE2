@@ -85,8 +85,26 @@ function Edit() {
   }, [reset, path, authToken]);
 
   const handleEditVenue = async () => {
+    const updatedData = { ...data };
+
+    updatedData.meta = {
+      wifi: updatedData.wifi,
+      parking: updatedData.parking,
+      breakfast: updatedData.breakfast,
+      pets: updatedData.pets,
+    };
+
+    updatedData.location = {
+      address: updatedData.location.address,
+      city: updatedData.location.city,
+      zip: updatedData.location.zip,
+      country: updatedData.location.country,
+      continent: updatedData.location.continent,
+      lat: parseFloat(updatedData.location.lat),
+      lng: parseFloat(updatedData.location.lng),
+    };
+
     try {
-      const updatedData = { ...data };
       updatedData.media = mediaUrls;
 
       const response = await fetch(`${API_HOST_URL}${path}`, {
@@ -97,6 +115,8 @@ function Edit() {
         },
         body: JSON.stringify(updatedData),
       });
+
+      console.log("Response:", response);
       if (response.ok) {
         alert("updated");
       }
@@ -361,29 +381,31 @@ function Edit() {
           </div>
           <div className="mt-6 flex flex-col md:flex-row md:justify-center">
             <div>
-              <label htmlFor="latitude">Latitude</label>
+              <label htmlFor="lat">Latitude</label>
               <Controller
-                name="latitude"
+                name="lat"
                 control={control}
                 render={({ field }) => (
                   <input
+                    required
                     className="bg-background border-b border-accent ml-3 px-2 leading-tight"
                     {...field}
-                    type="text"
+                    type="number"
                   />
                 )}
               />
             </div>
             <div className="md:ml-5">
-              <label htmlFor="longitude">Longitude</label>
+              <label htmlFor="lng">Longitude</label>
               <Controller
-                name="longitude"
+                name="lng"
                 control={control}
                 render={({ field }) => (
                   <input
+                    required
                     className="bg-background border-b border-accent ml-3 px-2 leading-tight"
                     {...field}
-                    type="text"
+                    type="number"
                   />
                 )}
               />
