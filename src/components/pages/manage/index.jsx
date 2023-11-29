@@ -86,7 +86,7 @@ function ManageVenues() {
 
                     <div className="flex flex-row mt-1 md:mt-2">
                       <Link to={`/edit/${venue.id}`}>
-                        <button className="bg-cta text-white ml-2 text-sm p-1 rounded-md">
+                        <button className="rounded-md bg-cta border-cta border  text-white text-sm p-1 hover:border-accent hover:border hover:shadow-lg hover:text-background hover:bg-primary">
                           Edit
                         </button>
                       </Link>
@@ -103,7 +103,17 @@ function ManageVenues() {
             ))}
           </div>
         )}
-        {showVenues && venues.length === 0 && <h2>No Venues available.</h2>}
+        {showVenues && venues.length === 0 && (
+          <div className="bg-black border-accent border p-2 w-1/2 m-auto mt-2 rounded-md text-sm md:text-center">
+            <h2 className="">
+              No Venues available. Click <span> </span>
+              <Link className="text-accent" to="/create">
+                here
+              </Link>{" "}
+              to create a venue.
+            </h2>
+          </div>
+        )}
       </div>
     </div>
   );
