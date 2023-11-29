@@ -1,7 +1,7 @@
 import React from "react";
 import { API_HOST_URL } from "../../../storage/constants";
 
-function Delete({ id }) {
+function Delete({ id, onDelete }) {
   const path = `/venues/${id}`;
   const authToken = localStorage.getItem("token");
 
@@ -16,7 +16,7 @@ function Delete({ id }) {
         body: JSON.stringify(),
       });
       if (response.ok) {
-        alert("Deleted");
+        onDelete && onDelete(id);
       }
     } catch (error) {
       console.error("Error deleting venue:", error);

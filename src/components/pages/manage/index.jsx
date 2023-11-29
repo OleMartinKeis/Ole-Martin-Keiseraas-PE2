@@ -12,6 +12,12 @@ function ManageVenues() {
   const user = JSON.parse(userData);
   const [path, setPath] = useState("/home");
 
+  const handleDeleteVenue = (deletedVenueId) => {
+    setVenues((prevVenues) =>
+      prevVenues.filter((venue) => venue.id !== deletedVenueId)
+    );
+  };
+
   const handleShowVenues = async () => {
     if (showVenues) {
       setShowVenues(false);
@@ -90,7 +96,7 @@ function ManageVenues() {
                           Edit
                         </button>
                       </Link>
-                      <Delete id={venue.id} />
+                      <Delete id={venue.id} onDelete={handleDeleteVenue} />
                     </div>
                   </div>
                   <div className="ml-auto flex items-center justify-center">
