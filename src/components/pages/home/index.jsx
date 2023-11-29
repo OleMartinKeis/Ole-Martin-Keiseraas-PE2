@@ -74,6 +74,10 @@ function Home() {
     <div className="w-100">
       <Helmet>
         <title>Home | VenueVista</title>
+        <meta
+          name="description"
+          content="Homepage for VenueVista, a vacation booking site"
+        />
       </Helmet>
       <div className="bg-gradient-to-b from-primary from-10% to-bg ">
         <div className="flex place-content-center w-100">

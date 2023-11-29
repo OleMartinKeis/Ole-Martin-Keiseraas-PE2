@@ -46,6 +46,7 @@ function ManageVenues() {
     <div>
       <Helmet>
         <title>Manager panel | VenueVista</title>
+        <meta name="description" content="Your Manager panel at VenueVista" />
       </Helmet>
       <div className=" bg-gradient-to-b from-primary from-10% to-bg h-40"></div>
       <h2 className="text-lg md:text-xl text-center pt-20 font-['Playfair_Display_SC']">

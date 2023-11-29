@@ -69,6 +69,10 @@ function Create() {
     <div>
       <Helmet>
         <title>Create | VenueVista</title>
+        <meta
+          name="description"
+          content="Create a venue at VenueVista to rent it out"
+        />
       </Helmet>
       <form
         onSubmit={handleSubmit(onSubmit)}

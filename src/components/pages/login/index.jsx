@@ -3,6 +3,8 @@ import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { API_HOST_URL } from "../../storage/constants";
 import { useAuth } from "../../storage/authentication";
+import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 
 const path = "/auth/login";
 
@@ -66,6 +68,7 @@ function Login() {
     <div className="flex flex-col justify-center items-center content-center h-screen">
       <Helmet>
         <title>Log in | VenueVista</title>
+        <meta name="description" content="Login to VenueVista" />
       </Helmet>
       <div className="flex flex-col items-center">
         <form
@@ -161,7 +164,7 @@ function Login() {
             VenueVista is created by Ole Martin Keiseraas, check out my
             <span> </span>
             <a
-              className="border-b border-accent"
+              className="border-b border-accent hover:text-primary"
               href="https://github.com/OleMartinKeis"
             >
               Github

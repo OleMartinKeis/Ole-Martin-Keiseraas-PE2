@@ -1,9 +1,8 @@
 import React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useAuth } from "../../storage/authentication";
 
 function Navbar() {
-  const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
   const user = JSON.parse(localStorage.getItem("user"));
   const isVenueManager = user && user.venueManager === true;

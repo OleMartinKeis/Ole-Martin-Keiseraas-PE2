@@ -119,6 +119,7 @@ function Edit() {
     <div>
       <Helmet>
         <title>Update | VenueVista</title>
+        <meta name="description" content="Update your venue at VenueVista" />
       </Helmet>
       <h1 className="text-xl md:text-2xl font-['Playfair_Display_SC']">
         Update Venue

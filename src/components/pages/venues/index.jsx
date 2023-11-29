@@ -38,6 +38,10 @@ function Venues() {
     <div className="w-100">
       <Helmet>
         <title>Venues | VenueVista</title>
+        <meta
+          name="description"
+          content="All of our venues at VenueVista, a vacation booking site"
+        />
       </Helmet>
       <div className="flex place-content-center">
         <input

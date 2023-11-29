@@ -81,6 +81,10 @@ function Venue() {
     <div className="font-sans">
       <Helmet>
         ( <title>{`${data.name} | VenueVista`}</title>)
+        <meta
+          name="description"
+          content="Book a vacation or look at a venue | VenueVista, a vacation booking site"
+        />
       </Helmet>
 
       <div className="pt-8 pb-2 border-t border-accent bg-primary">

@@ -63,7 +63,13 @@ function Register() {
 
   return (
     <div>
-      <Helmet>Register | VenueVista</Helmet>
+      <Helmet>
+        <title>Register | VenueVista</title>
+        <meta
+          name="description"
+          content="Register an account at VenueVista page for VenueVista, a vacation booking site"
+        />
+      </Helmet>
       <h1 className="sm:text-lg md:text-xl lg:text-2xl text-center pt-6 font-['Playfair_Display_SC'] ">
         Your dream location is just a few steps away
       </h1>

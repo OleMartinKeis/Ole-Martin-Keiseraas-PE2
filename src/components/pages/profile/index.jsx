@@ -80,6 +80,10 @@ function Profile() {
     <div>
       <Helmet>
         <title>Profile | VenueVista</title>
+        <meta
+          name="description"
+          content="Profile page for VenueVista, a vacation booking site"
+        />
       </Helmet>
       <div className="relative h-550px">
         <div
