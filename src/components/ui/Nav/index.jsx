@@ -13,7 +13,11 @@ function Navbar() {
         <div className="container mx-auto flex justify-between items-center">
           <NavLink
             to="/"
-            className="text-text text-xl md:text-2xl font-bold hover:text-blue-700 font-['Playfair_Display_SC']"
+            className={({ isActive }) =>
+              isActive
+                ? " text-blue-700 text-xl md:text-2xl font-bold hover:text-text font-['Playfair_Display_SC']"
+                : "text-text text-xl md:text-2xl font-bold hover:text-blue-700 font-['Playfair_Display_SC']"
+            }
           >
             VenueVista
           </NavLink>
@@ -22,7 +26,11 @@ function Navbar() {
               <li className="ml-4">
                 <NavLink
                   to="/profile"
-                  className="text-text hover:text-blue-700"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-blue-700 hover:text-text"
+                      : "text-text hover:text-blue-700"
+                  }
                 >
                   My Profile
                 </NavLink>
@@ -31,7 +39,11 @@ function Navbar() {
               <li className="ml-1">
                 <NavLink
                   to="/register"
-                  className="text-text hover:text-blue-700"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-blue-700 hover:text-text"
+                      : "text-text hover:text-blue-700"
+                  }
                 >
                   Register
                 </NavLink>
@@ -39,13 +51,27 @@ function Navbar() {
             )}
             {!isAuthenticated ? (
               <li className="ml-1">
-                <NavLink to="/login" className="text-text hover:text-blue-700">
+                <NavLink
+                  to="/login"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-blue-700 hover:text-text"
+                      : "text-text hover:text-blue-700"
+                  }
+                >
                   Login
                 </NavLink>
               </li>
             ) : (
               <li className="ml-1">
-                <NavLink to="/venues" className="text-text hover:text-blue-700">
+                <NavLink
+                  to="/venues"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-blue-700 hover:text-text"
+                      : "text-text hover:text-blue-700"
+                  }
+                >
                   Venues
                 </NavLink>
               </li>
@@ -53,7 +79,14 @@ function Navbar() {
 
             {isVenueManager && isAuthenticated && (
               <li className="ml-1">
-                <NavLink to="/manage" className="text-text hover:text-blue-700">
+                <NavLink
+                  to="/manage"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-blue-700 hover:text-text"
+                      : "text-text hover:text-blue-700"
+                  }
+                >
                   Manage venues
                 </NavLink>
               </li>
