@@ -18,6 +18,15 @@ function ManageVenues() {
     );
   };
 
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    const formattedDate = new Date(dateString).toLocaleDateString(
+      undefined,
+      options
+    );
+    return formattedDate;
+  };
+
   const handleShowVenues = async () => {
     if (showVenues) {
       setShowVenues(false);
@@ -87,7 +96,25 @@ function ManageVenues() {
                       <h2 className="text-xl border-b border-accent">
                         {venue.name}
                       </h2>
-                      <p className="mt-1">Bookings: {venue.bookings}</p>
+                      {venue.bookings && venue.bookings.length > 0 && (
+                        <div>
+                          <p className="mt-1">Bookings:</p>
+                          <ul>
+                            {venue.bookings.map((booking) => (
+                              <li
+                                key={booking.id}
+                                className="text-xs sm:text-sm md:text-base p-1 border-accent border bg-primary text-text rounded-xl mt-2"
+                              >
+                                {`From: ${formatDate(
+                                  booking.dateFrom
+                                )} To: ${formatDate(booking.dateTo)}, Guests: ${
+                                  booking.guests
+                                }`}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
                     </div>
 
                     <div className="flex flex-row mt-1 md:mt-2">
@@ -101,7 +128,13 @@ function ManageVenues() {
                   </div>
                   <div className="ml-auto flex items-center justify-center">
                     <div>
-                      <img src={venue.media[0]} className="h-20" />
+                      {venue.media.length > 0 && (
+                        <img
+                          src={venue.media[0]}
+                          className="h-20 w-20"
+                          alt={`Venue ${venue.name} - Image 1}`}
+                        />
+                      )}
                     </div>
                   </div>
                 </div>
