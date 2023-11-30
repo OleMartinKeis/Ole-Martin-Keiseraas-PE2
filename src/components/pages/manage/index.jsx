@@ -103,7 +103,7 @@ function ManageVenues() {
                             {venue.bookings.map((booking) => (
                               <li
                                 key={booking.id}
-                                className="text-xs sm:text-sm md:text-base p-1 border-accent border bg-primary text-text rounded-xl mt-2"
+                                className="text-xs sm:text-sm md:text-base p-1 border-accent border bg-primary text-text rounded-xl mt-2 shadow-xl"
                               >
                                 {`From: ${formatDate(
                                   booking.dateFrom
