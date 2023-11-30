@@ -28,7 +28,7 @@ There are two aspects to this brief: the customer-facing side of the website whe
 12. [x] A registered Venue manager may view bookings for a Venue they manage
 13. [x] A registered user may login
 14. [x] A registered user may update their avatar
-15. [X]A registered user may logout
+15. [x] A registered user may logout
 
 ## Used Resources
 
