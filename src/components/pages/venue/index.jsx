@@ -14,6 +14,7 @@ function Venue() {
   const [numGuests, setNumGuests] = useState(1);
   const [bookingError, setBookingError] = useState(null);
   const [bookingStatus, setBookingStatus] = useState(null);
+  const [selectedImage, setSelectedImage] = useState("");
   const token = localStorage.getItem("token");
 
   const metaLabels = {
@@ -34,6 +35,12 @@ function Venue() {
 
   const handleNumGuestsChange = (e) => {
     setNumGuests(Number(e.target.value));
+  };
+
+  const handleImageClick = (image) => {
+    setSelectedImage(image);
+    console.log("selectedImage", selectedImage);
+    console.log("image", image);
   };
 
   const handleSubmit = async (e) => {
@@ -92,30 +99,45 @@ function Venue() {
           {data.name}
         </h1>
       </div>
-      <div className="flex bg-gradient-to-b from-primary from-10% to-bg   mb-8 shadow-">
-        <div className=" flex flex-col p-2 m-auto">
-          <div className="flex items-center justify-center  w-full">
-            {data.media && data.media.length > 0 && (
+      <div className="flex justify-center bg-gradient-to-b from-primary from-10% to-bg   mb-8 shadow-">
+        <div className="grid gap-1 md:gap-3">
+          <div className="col-span-6 gap-1 row-span-2 w-1/2 m-auto">
+            {data.media?.length === 1 && (
               <img
+                className="w-full h-full object-cover aspect-4/3 rounded border-accent border shadow-xl"
                 src={data.media[0]}
-                alt={data.name}
-                className="w-1/2 lg:w-2/3 h-auto mb-4 md:mb-0 border-accent border rounded-md shadow-2xl m-2"
+                alt={`Venue ${data.media[0]}`}
               />
             )}
-            <div className="flex flex-col w-1/2 h-full">
-              {data.media &&
-                data.media
-                  .slice(1)
-                  .map((image, index) => (
-                    <img
-                      key={index}
-                      src={image}
-                      alt={data.name}
-                      className=" w-1/4 m-2 border-accent border rounded-md shadow-xl"
-                    />
-                  ))}
-            </div>
+            {data.media?.length > 1 && selectedImage && (
+              <img
+                className="w-full h-full object-cover aspect-4/3 rounded border-accent border shadow-xl"
+                src={selectedImage}
+                alt={`Venue ${selectedImage}`}
+              />
+            )}
           </div>
+          {data.media?.length > 1 &&
+            data.media?.map((image, index) => (
+              <div
+                key={index}
+                className={`md:col-span-1 md:row-span-1 cursor-pointer w-1/2 md:w-full md:h-1/2`}
+              >
+                <img
+                  className={` md:w-full md:h-full object-cover aspect-square rounded-lg ${
+                    (data.media.length === 1 && selectedImage === image) ||
+                    (data.media.length > 1 && image === selectedImage)
+                      ? "selected-image"
+                      : "other-image"
+                  }`}
+                  src={image}
+                  alt={`Venue ${index}`}
+                  onClick={() =>
+                    data.media.length > 1 && handleImageClick(image)
+                  }
+                />
+              </div>
+            ))}
         </div>
       </div>
       <div className="flex md:flex-row flex-col">
@@ -132,11 +154,11 @@ function Venue() {
           ) : (
             <h3>Anonymous</h3>
           )}
-          <div className="ml-6">
+          <div className=" ml-1 md:ml-6">
             <p className="font-sans md:flex-row mt-5 ">{data.description}</p>
           </div>
           <div>
-            <div className="pt-1 pb-1 ml-6 mt-5">
+            <div className="pt-1 pb-1 text-center md:text-left md:ml-6 mt-5">
               <p className="font-link pb-2 pt-2">
                 Price per night: {data.price} kr
               </p>
