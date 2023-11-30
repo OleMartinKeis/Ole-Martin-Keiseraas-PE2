@@ -84,7 +84,7 @@ function Home() {
           <div
             className="shadow-2xl rounded-xl inset-0 bg-cover bg-center text-center"
             style={{
-              backgroundImage: 'url("../src/assets/frontpage2.jpg")',
+              backgroundImage: 'url("/frontpage2.jpg")',
               backgroundSize: "cover",
               backgroundPosition: "center",
               width: "75%",
