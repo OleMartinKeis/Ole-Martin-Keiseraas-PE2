@@ -89,7 +89,7 @@ function Profile() {
         <div
           className="shadow-2xl inset-0 bg-cover bg-center text-center border-b border-accent"
           style={{
-            backgroundImage: 'url("../src/assets/profilepage.jpg")',
+            backgroundImage: 'url("/profilepage.jpg")',
             backgroundSize: "cover",
             backgroundPosition: "center",
             width: "100%",
