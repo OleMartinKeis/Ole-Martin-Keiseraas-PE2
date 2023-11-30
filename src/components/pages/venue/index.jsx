@@ -39,8 +39,6 @@ function Venue() {
 
   const handleImageClick = (image) => {
     setSelectedImage(image);
-    console.log("selectedImage", selectedImage);
-    console.log("image", image);
   };
 
   const handleSubmit = async (e) => {
