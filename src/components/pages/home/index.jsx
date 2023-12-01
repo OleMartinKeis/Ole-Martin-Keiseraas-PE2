@@ -121,7 +121,7 @@ function Home() {
           ? filteredVenues.map((item) => (
               <div
                 key={item.id}
-                className="shadow-2xl flex p-2 border-2  max-w-sm rounded-sm hover:rounded-l hover:border-accent hover:text-accent hover:duration-300 mb-4"
+                className="shadow-md flex p-2 border-2  max-w-sm rounded-sm hover:rounded-lg hover:border-accent hover:text-accent hover:duration-300 mb-4 hover:shadow-3xl"
               >
                 <div className="w-full">
                   <h2 className="text-base truncate max-w-[250px]">
@@ -181,7 +181,7 @@ function Home() {
           : allVenues.map((item) => (
               <div
                 key={item.id}
-                className="shadow-2xl flex p-2 border-2  max-w-sm rounded-sm hover:rounded-l hover:border-accent hover:text-accent hover:duration-300 mb-4"
+                className="shadow-md flex p-2 border-2  max-w-sm rounded-sm hover:rounded-lg hover:border-accent hover:text-accent hover:duration-300 mb-4 hover:shadow-2xl"
               >
                 <div className="w-full">
                   <h2 className="text-base truncate max-w-[250px]">
