@@ -12,11 +12,15 @@ export default {
     extend: {
         colors: {
             'text': '#000000',
-            'background': '#b8deff',
+            'background': '#34495E',
             'primary': '#a0b5ca',
             'secondary': '#1ea3be',
             'accent': '#3df5ff',
+            'cta': '#4169E1'
         },
+        fontFamily: {
+            'sans': ['Lato']
+        }
     },
   },
   plugins: [],
