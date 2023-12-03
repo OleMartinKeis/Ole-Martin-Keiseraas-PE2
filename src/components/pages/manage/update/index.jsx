@@ -88,10 +88,10 @@ function Edit() {
     const updatedData = { ...data };
 
     updatedData.meta = {
-      wifi: updatedData.wifi,
-      parking: updatedData.parking,
-      breakfast: updatedData.breakfast,
-      pets: updatedData.pets,
+      wifi: updatedData.meta.wifi,
+      parking: updatedData.meta.parking,
+      breakfast: updatedData.meta.breakfast,
+      pets: updatedData.meta.pets,
     };
 
     updatedData.location = {
