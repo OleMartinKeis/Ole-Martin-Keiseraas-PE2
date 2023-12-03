@@ -1,6 +1,6 @@
 # Project Exam - VenueVista
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/439306e5-4b38-42fb-aae1-64b6dec09eec/deploy-status)](https://app.netlify.com/sites/celebrated-kataifi-9f3a96/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/439306e5-4b38-42fb-aae1-64b6dec09eec/deploy-status)](https://app.netlify.com/sites/omk-holidaze/deploys)
 
 ## Goal
 
@@ -40,6 +40,29 @@ There are two aspects to this brief: the customer-facing side of the website whe
 - - react-router-dom
 - - react-hook-form
 - - react-calendar
+
+## User Testing
+
+### Remote testing
+
+I had two people from the class test my website remotely, give me feedback and adjust my code thereafter.
+
+### In-person testing
+
+I had three different people use and test my webpage in-person while I watched, without trying to guide them on using the webpage.
+
+The following devices was used:
+
+| First user                   | Second user     | Third user      |
+| ---------------------------- | --------------- | --------------- |
+| Windows 1920x1080 Stationary | MacBook pro 13" | MacBook pro 13" |
+| iPhone 13                    | iPhone 14       | iPhone 13       |
+
+First user had difficulties reading on some paragraphs, so I justed fonts.
+
+Second user had a lot of white space between body and footer, also needed a little guiding on how to create a venue
+
+Third user wanted more margin in the description paragraph on the venue page on mac
 
 ## Available Scripts
 
