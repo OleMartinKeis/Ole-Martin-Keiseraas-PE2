@@ -87,23 +87,6 @@ function Edit() {
   const handleEditVenue = async () => {
     const updatedData = { ...data };
 
-    updatedData.meta = {
-      wifi: updatedData.meta.wifi,
-      parking: updatedData.meta.parking,
-      breakfast: updatedData.meta.breakfast,
-      pets: updatedData.meta.pets,
-    };
-
-    updatedData.location = {
-      address: updatedData.location.address,
-      city: updatedData.location.city,
-      zip: updatedData.location.zip,
-      country: updatedData.location.country,
-      continent: updatedData.location.continent,
-      lat: parseFloat(updatedData.location.lat),
-      lng: parseFloat(updatedData.location.lng),
-    };
-
     try {
       updatedData.media = mediaUrls;
 
