@@ -1,107 +1,88 @@
 import React, { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { API_HOST_URL } from "../../../storage/constants";
 import { Helmet } from "react-helmet";
+import { useAuth } from "../../../storage/authentication";
 
 function Edit() {
   const { id } = useParams();
-  const path = `/venues/${id}`;
-  const authToken = localStorage.getItem("token");
-  const [description, setDescription] = useState("");
-  const { control, handleSubmit, reset, formState } = useForm({
-    defaultValues: {
-      name: "",
-      description: "",
-      media: [],
-      price: 0,
-      maxGuests: 0,
-      rating: 0,
-      meta: {
-        wifi: false,
-        parking: false,
-        breakfast: false,
-        pets: false,
-      },
-      location: {
-        address: "",
-        city: "",
-        zip: "",
-        country: "",
-        continent: "",
-        lat: 0,
-        lng: 0,
-      },
-    },
-  });
-  const { isSubmitting } = formState;
-  const [data, setData] = React.useState(null);
-  const [mediaUrls, setMediaUrls] = useState([]);
+  const navigate = useNavigate();
+  const { handleSubmit, control, setValue } = useForm();
+  const [description, setDescription] = useState();
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchVenueDetails = async () => {
       try {
-        const response = await fetch(`${API_HOST_URL}${path}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${authToken}`,
-          },
-        });
-
-        if (response.ok) {
-          const responseData = await response.json();
-          setData(responseData);
-          reset({
-            name: responseData.name,
-            description: responseData.description,
-            media: responseData.media,
-            price: responseData.price,
-            maxGuests: responseData.maxGuests,
-            rating: responseData.rating,
-            meta: {
-              wifi: responseData.meta.wifi,
-              parking: responseData.meta.parking,
-              breakfast: responseData.meta.breakfast,
-              pets: responseData.meta.pets,
-            },
-            location: {
-              address: responseData.address,
-              city: responseData.city,
-              zip: responseData.zip,
-              country: responseData.country,
-              continent: responseData.continent,
-              lat: responseData.lat,
-              lng: responseData.lng,
-            },
-          });
-        }
-      } catch (error) {
-        console.error("Error fetching venue data:", error);
+        const response = await fetch(`${API_HOST_URL}/venues/${id}`);
+        const venue = await response.json();
+        setValue("name", venue.name);
+        setValue("description", venue.description);
+        setValue("price", venue.price);
+        setValue("maxGuests", venue.maxGuests);
+        setValue("rating", venue.rating);
+        setValue("media-1", venue.media[0] || "");
+        setValue("media-2", venue.media[1] || "");
+        setValue("media-3", venue.media[2] || "");
+        setValue("wifi", venue.meta.wifi || false);
+        setValue("parking", venue.meta.parking || false);
+        setValue("breakfast", venue.meta.breakfast || false);
+        setValue("pets", venue.meta.pets || false);
+        setValue("country", venue.location.country);
+        setValue("continent", venue.location.continent || "");
+        setValue("city", venue.location.city || "");
+        setValue("zip", venue.location.zip || "");
+        setValue("address", venue.location.address || "");
+        setValue("location.lat", venue.location.lat || "");
+        setValue("location.lng", venue.location.lng || "");
+      } catch {
+        console.error("error", error);
       }
     };
+    fetchVenueDetails();
+  }, [id, setValue]);
 
-    fetchData();
-  }, [reset, path, authToken]);
-
-  const handleEditVenue = async () => {
-    const updatedData = { ...data };
-
+  const handleEditVenue = async (data) => {
     try {
-      updatedData.media = mediaUrls;
+      if (!isAuthenticated) {
+        console.error("User not authenticated");
+        navigate("/login");
+        return;
+      }
+      const locationFields = {
+        address: data.address,
+        city: data.city,
+        zip: data.zip,
+        country: data.country,
+        continent: data.continent,
+        lat: parseFloat(data.location.lat),
+        lng: parseFloat(data.location.lng),
+      };
 
-      const response = await fetch(`${API_HOST_URL}${path}`, {
+      const requestData = {
+        ...data,
+        location: locationFields,
+      };
+
+      console.log("Data object before fetch:", data);
+      const token = localStorage.getItem("token");
+      const response = await fetch(`${API_HOST_URL}/venues/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${authToken}`,
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(updatedData),
+        body: JSON.stringify(requestData),
       });
 
-      console.log("Response:", response);
       if (response.ok) {
-        alert("updated");
+        const updatedVenue = await response.json();
+        console.log("Venue updated successfully:", updatedVenue);
+        // Optionally, you can redirect to the updated venue or another page
+        navigate(`/venues/${id}`);
+      } else {
+        console.error("Error updating venue:", response.statusText);
       }
     } catch (error) {
       console.error("Error updating venue:", error);
@@ -109,13 +90,14 @@ function Edit() {
   };
 
   const addMediaUrl = (url, index) => {
-    const updatedMediaUrls = [...mediaUrls];
-    updatedMediaUrls[index] = url;
-    setMediaUrls(updatedMediaUrls);
+    setValue(`media-${index + 1}`, url);
+    // Implement other logic if needed
   };
 
-  const handleDescriptionChange = (event) => {
-    setDescription(event.target.value);
+  const handleDescriptionChange = (e) => {
+    const newDescription = e.target.value;
+    setDescription(newDescription);
+    setValue("description", newDescription);
   };
 
   return (
@@ -347,9 +329,9 @@ function Edit() {
                 />
               </div>
               <div>
-                <label htmlFor="Address">Address</label>
+                <label htmlFor="address">Address</label>
                 <Controller
-                  name="Address"
+                  name="address"
                   control={control}
                   render={({ field }) => (
                     <input
@@ -366,11 +348,10 @@ function Edit() {
             <div>
               <label htmlFor="lat">Latitude</label>
               <Controller
-                name="lat"
+                name="location.lat"
                 control={control}
                 render={({ field }) => (
                   <input
-                    required
                     className="bg-background border-b border-accent ml-3 px-2 leading-tight"
                     {...field}
                     type="number"
@@ -381,11 +362,10 @@ function Edit() {
             <div className="md:ml-5">
               <label htmlFor="lng">Longitude</label>
               <Controller
-                name="lng"
+                name="location.lng"
                 control={control}
                 render={({ field }) => (
                   <input
-                    required
                     className="bg-background border-b border-accent ml-3 px-2 leading-tight"
                     {...field}
                     type="number"
@@ -397,7 +377,6 @@ function Edit() {
         </div>
         <div className="mt-4">
           <button
-            disabled={isSubmitting}
             className="rounded-md mt-2 bg-cta border-cta border  text-white text-sm p-1 hover:border-accent hover:border hover:shadow-lg hover:text-background hover:bg-primary"
             type="Submit"
           >
