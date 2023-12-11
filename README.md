@@ -68,6 +68,18 @@ Third user wanted more margin in the description paragraph on the venue page on 
 
 In the project directory, you can run:
 
+1. Clone the repo:
+
+```bash
+git clone git@github.com:NoroffFEU/portfolio-1-example.git
+```
+
+2. Install the dependencies:
+
+```
+npm install
+```
+
 ### `npm run dev`
 
 Runs the app in the development mode.\
